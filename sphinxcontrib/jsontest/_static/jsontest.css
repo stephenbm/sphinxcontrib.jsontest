@@ -1,0 +1,28 @@
+div.json-response { display: none; }
+
+div.flex-container { display: flex; }
+div.flex-container div.url-args { width: 40%; }
+div.flex-container div.url-args label {
+    cursor: text;
+    margin-top: 5px;
+    display: inline-block;
+    width: 35%;
+    overflow: wrap;
+}
+div.flex-container div.url-args input {
+    display: inline-block;
+    width: 55%;
+}
+div.flex-container div.json-box { flex-grow: 1; }
+div.flex-container div.json-box textarea[name=json-input] {
+    resize: none;
+    width: 100%;
+    height: 15em;
+}
+div.button-container { height: 45px; }
+div.button-container div.schema-uri { display: none; }
+a.jsontest {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float: right;
+}

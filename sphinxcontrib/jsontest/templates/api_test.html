@@ -1,0 +1,26 @@
+<div class="test-container">
+    <div class="flex-container">
+        {% if url_args %}
+        <div class="url-args">
+        {% for name, value in url_args %}
+            <div>
+                <label for="{{ name }}">{{ name }}</label>
+                <input type="text" id="{{ name }}" name="{{ name }}" value="{{ value }}"/><br/>
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+        {% if json_input is not none %}
+        <div class="json-box">
+            <textarea name="json-input">{{ json_input }}</textarea>
+        </div>
+        {% endif %}
+    </div>
+    <div class="button-container" id="jsontest-{{ index }}">
+        {% if schema %}
+        <div class="schema-uri">{{ schema }}</div>
+        {% endif %}
+        <a href='' class="btn btn-neutral jsontest">Test Call&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+    </div>
+    <div class="highlight json-response"><pre></pre></div>
+</div>
