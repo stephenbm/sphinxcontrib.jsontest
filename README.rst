@@ -13,7 +13,7 @@ encoded post data (if you would like this, please add it and send a pull
 request).
 
 There is support for client side `json-schema <http://json-schema.org/>`_
-validation (currently only for draft04). jsonschema uses
+validation (currently only for draft04). jsontest uses
 `tv4 <http://https://github.com/geraintluff/tv4>`_ for schema
 validation.
 
