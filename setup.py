@@ -22,16 +22,16 @@ except IOError:
 setup(
     name='sphinxcontrib-jsontest',
     version='0.1',
-    description='Sphinx extension allows you to call json apis',
+    description='Sphinx extension allows you to test json apis',
     long_description=README,
     author='Stephen Breyer-Menke',
     author_email='steve.bm@gmail.com',
-    license='MIT',
+    license='Public domain',
     url='https://github.com/stephenbm/sphinxcontrib.jsontest',
     packages=find_packages(),
     namespace_packages=['sphinxcontrib'],
     install_requires=install_requires,
     include_package_data=True,
-    package_data={'sphinxcontrib.jsoncall': ['_static/*']},
+    package_data={'sphinxcontrib.jsontest': ['_static/*']},
     zip_safe=False
 )
