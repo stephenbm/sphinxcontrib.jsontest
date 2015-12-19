@@ -1,0 +1,2 @@
+recursive-include sphinxcontrib/jsontest/_static *.js *.css
+global-exclude *.pyc
