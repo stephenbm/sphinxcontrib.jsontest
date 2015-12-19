@@ -78,4 +78,4 @@ The code is available as "public domain", meaning that it is completely free to 
 without any restrictions at all. Read the full license 
 `here <https://github.com/stephenbm/sphinxcontrib.jsontest/blob/master/LICENSE>`_.
 
-It's also available under an MIT license. `MIT license <http://jsonary.com/LICENSE.txt>`_
+It's also available under an MIT license. `MIT license <https://opensource.org/licenses/MIT>`_
