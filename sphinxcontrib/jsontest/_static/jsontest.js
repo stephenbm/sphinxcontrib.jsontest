@@ -62,7 +62,9 @@ window.jsontest = {
         return kwargs
     },
     postData: function(button) {
-        return JSON.parse(button.prev().find('div.json-box textarea').val());
+        var data = button.prev().find('div.json-box textarea').val();
+        if (data) { return JSON.parse(data); }
+        return data;
     },
     updateResponseContent: function(button, data) {
         content = button.next()

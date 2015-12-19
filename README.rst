@@ -32,7 +32,7 @@ Setup
 
 To install (assuming you have pip setup) just run::
 
-    pip install sphinxcontrib.jsontest
+    pip install sphinxcontrib-jsontest
 
 Then add sphinxcontrib.jsontest to your list of extensions in conf.py::
 
