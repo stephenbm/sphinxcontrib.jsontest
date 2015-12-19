@@ -19,6 +19,7 @@ div.flex-container div.json-box textarea[name=json-input] {
     width: 100%;
     height: 15em;
 }
+div.flex-container div.json-box textarea[name=json-input].success { background: #dbfaf4; }
 div.button-container { height: 45px; }
 div.button-container div.schema-uri { display: none; }
 a.jsontest {

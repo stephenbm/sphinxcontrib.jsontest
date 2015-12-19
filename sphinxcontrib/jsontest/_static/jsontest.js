@@ -29,14 +29,27 @@ window.jsontest = {
             type: $(parts[0]).text().trim().toUpperCase(),
             url: parsed.join(''),
             success: function(data, text_status, error) {
-                content = button.next()
-                content.find('pre:first').text(JSON.stringify(data, null, 4)).each(function(i, block) {
-                    hljs.highlightBlock(block);
-                });
-                content.fadeIn(100);
+                button.prev().find('textarea').addClass('success');
+                button.prev().find('textarea').removeClass('error');
+                window.jsontest.updateResponseContent(button, data);
             },
-            error: function(data, text_status, error) {
-                console.log('error');
+            error: function(response, text_status, error) {
+                button.prev().find('textarea').removeClass('success');
+                button.prev().find('textarea').addClass('error');
+                try {
+                    message = JSON.parse(response.responseText);
+                } catch(err) {
+                    message = response.responseText;
+                }
+                data = {
+                    error: "There was an error processing the request",
+                    error_status: {
+                        code: response.status,
+                        status: response.statusText
+                    },
+                    message: message
+                }
+                window.jsontest.updateResponseContent(button, data);
             }
         };
     },
@@ -50,6 +63,13 @@ window.jsontest = {
     },
     postData: function(button) {
         return JSON.parse(button.prev().find('div.json-box textarea').val());
+    },
+    updateResponseContent: function(button, data) {
+        content = button.next()
+        content.find('pre:first').text(JSON.stringify(data, null, 4)).each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+        content.fadeIn(100);
     }
 }
 
@@ -59,15 +79,23 @@ $(document).ready(function() {
         window.jsontest.loadSchema($(this).parent());
     }).click(function(eventArgs) {
         eventArgs.preventDefault();
-        var ajax_kwargs = window.jsontest.ajaxKwargs($(this).parent());
-        var url_kwargs = window.jsontest.urlKwargs($(this).parent());
+        button = $(this).parent();
+        var ajax_kwargs = window.jsontest.ajaxKwargs(button);
+        var url_kwargs = window.jsontest.urlKwargs(button);
         ajax_kwargs.url = ajax_kwargs.url.supplant(url_kwargs);
-        var schema = window.jsontest.schemas[$(this).parent().attr('id')];
+        var schema = window.jsontest.schemas[button.attr('id')];
         if (schema && (ajax_kwargs['type'] == 'POST')) {
-            var data = window.jsontest.postData($(this).parent());
+            var data = window.jsontest.postData(button);
             var valid = tv4.validate(data, schema);
             if (!valid) {
-                console.log(JSON.stringify(tv4.error, null, 4));
+                button.prev().find('textarea').removeClass('success');
+                button.prev().find('textarea').addClass('error');
+                var errors = {
+                    "error": "There was an error validating the schema",
+                    "reasons": tv4.error
+                }
+                delete errors.reasons['stack'];
+                window.jsontest.updateResponseContent(button, errors);
                 return;
             }
             ajax_kwargs.contentType = 'application/json'
@@ -75,5 +103,4 @@ $(document).ready(function() {
         }
         $.ajax(ajax_kwargs);
     });
-    setTimeout(function(){console.log(jsontest.schemas);}, 3000);
 });
