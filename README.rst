@@ -70,3 +70,12 @@ and pass the url or relative path to the schema file to validate against::
         :schema: schemas/test_input.json
 
 You can combine the url_args, json_input and schema options.
+
+License
+=======
+
+The code is available as "public domain", meaning that it is completely free to use,
+without any restrictions at all. Read the full license 
+`here <https://github.com/stephenbm/sphinxcontrib.jsontest/blob/master/LICENSE>`_.
+
+It's also available under an MIT license. `MIT license <http://jsonary.com/LICENSE.txt>`_
