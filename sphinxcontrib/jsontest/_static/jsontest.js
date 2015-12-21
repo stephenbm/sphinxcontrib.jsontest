@@ -88,15 +88,17 @@ $(document).ready(function() {
         var schema = window.jsontest.schemas[button.attr('id')];
         if (schema && (ajax_kwargs['type'] == 'POST')) {
             var data = window.jsontest.postData(button);
-            var valid = tv4.validate(data, schema);
-            if (!valid) {
+            var result = tv4.validateMultiple(data, schema);
+            if (!result.valid) {
                 button.prev().find('textarea').removeClass('success');
                 button.prev().find('textarea').addClass('error');
                 var errors = {
                     "error": "There was an error validating the schema",
-                    "reasons": tv4.error
+                    "reasons": result
                 }
-                delete errors.reasons['stack'];
+                $.map(errors.reasons.errors, function (error) {
+                    delete error['stack'];
+                });
                 window.jsontest.updateResponseContent(button, errors);
                 return;
             }
