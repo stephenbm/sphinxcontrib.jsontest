@@ -15,7 +15,9 @@ request).
 There is support for client side `json-schema <http://json-schema.org/>`_
 validation (currently only for draft04). jsontest uses
 `tv4 <http://https://github.com/geraintluff/tv4>`_ for schema
-validation.
+validation. jsontest supports loading schemas from different files provided
+they can be accessed from the same host either using a relative path (e.g. 
+sample.json) or a full path for the same host (e.g. /schemas/sample.json)
 
 jsontest requires sphinxcontrib.httdomain documented apis and uses the 
 dom to add events to elements on the page (it does expect a specific 
