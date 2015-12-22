@@ -18,7 +18,7 @@ window.jsontest = {
                 };
             },
             error: function(data, text_status, error) {
-                console.log('error');
+                console.log('error loading schema from: ' + schema_uri);
             }
         });
     },
@@ -66,7 +66,17 @@ window.jsontest = {
     },
     postData: function(button) {
         var data = button.prev().find('div.json-box textarea').val();
-        if (data) { return JSON.parse(data); }
+        if (data) {
+            try {
+                return JSON.parse(data);
+            } catch(err) {
+                window.jsontest.updateResponseContent(button, {
+                    error: 'malformed json request',
+                    reason: err.message
+                });
+                throw(err);
+            }
+        }
         return data;
     },
     updateResponseContent: function(button, data) {
@@ -78,7 +88,7 @@ window.jsontest = {
     },
     cacheReferencedSchema: function(ajax_kwargs, button, schema, missing_schema, callback) {
         var uri = missing_schema;
-        if (missing_schema[0] != '/') {
+        if (missing_schema[0] != '/' && !(/^https?:\/\//.test(uri))) {
             uri = schema.uri.split('/');
             uri = uri.slice(0,-1);
             uri = uri.concat(missing_schema);
@@ -91,7 +101,7 @@ window.jsontest = {
                 callback(ajax_kwargs, button, schema);
             },
             error: function(data, text_status, error) {
-                console.log('error');
+                console.log('error caching referenced schema from: ' + uri);
             }
         });
     },

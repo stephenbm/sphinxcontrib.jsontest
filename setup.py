@@ -21,7 +21,7 @@ except IOError:
 
 setup(
     name='sphinxcontrib-jsontest',
-    version='0.1.4',
+    version='0.1.5',
     description='Sphinx extension allows you to test json apis',
     long_description=README,
     author='Stephen Breyer-Menke',
