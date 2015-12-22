@@ -99,9 +99,6 @@ window.jsontest = {
         var validator = function (ajax_kwargs, button, schema) {
             var data = window.jsontest.postData(button);
             var result = tv4.validateMultiple(data, schema.schema);
-            console.log(data);
-            console.log(schema.schema);
-            console.log(result);
             if (result.missing.length) {
                 window.jsontest.cacheReferencedSchema(ajax_kwargs, button, schema, result.missing[0], validator);
             } else {
@@ -141,10 +138,8 @@ $(document).ready(function() {
         var url_kwargs = window.jsontest.urlKwargs(button);
         ajax_kwargs.url = ajax_kwargs.url.supplant(url_kwargs);
         var schema = window.jsontest.schemas[button.attr('id')];
-        console.log(ajax_kwargs);
         if (ajax_kwargs['type'] == 'POST' || ajax_kwargs['type'] == 'PUT') {
             if (schema) {
-                console.log(schema);
                 window.jsontest.validateSchema(ajax_kwargs, button, schema);
                 return;
             } else {
