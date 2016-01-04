@@ -21,7 +21,7 @@ def visit_jsontest_html(self, node):
     split = lambda arg: tuple(arg.strip().split('='))
     self.body.append(env.get_template('api_test.html').render(
         index=node.index,
-        url_args=map(split, node.url_args),
+        url_args=[split(arg) for arg in node.url_args],
         json_input=node.json_input,
         schema=node.schema
     ))
