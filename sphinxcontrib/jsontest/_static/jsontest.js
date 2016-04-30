@@ -107,7 +107,7 @@ window.jsontest = {
     },
     validateSchema: function(ajax_kwargs, button, schema) {
         var validator = function (ajax_kwargs, button, schema) {
-            var data = window.jsontest.postData(button) || {};
+            var data = window.jsontest.postData(button);
             var result = tv4.validateMultiple(data, schema.schema);
             if (result.missing.length) {
                 window.jsontest.cacheReferencedSchema(ajax_kwargs, button, schema, result.missing[0], validator);
